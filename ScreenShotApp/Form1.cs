@@ -28,7 +28,7 @@ namespace ScreenShotApp
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            System.Threading.Thread.Sleep(1000);
+          //  System.Threading.Thread.Sleep(1000);
             SendKeys.Send("{PRTSC}");
             Image myImage = Clipboard.GetImage();
             pictureBox1.Image = myImage;
@@ -37,9 +37,16 @@ namespace ScreenShotApp
             inc += 1;
             string inc2 = "";
             inc2 = inc.ToString();
-            copy.Save("D:\\pictures\\ScreenShot_"+inc2+".png");
+          //  copy.Save("D:\\pictures\\ScreenShot_" + inc2 + ".png");
             this.Show();
-            textBoxTest.Text = directory;
+            if(directory != null)
+            {
+                string directory2 = "";
+                directory2 = directory.ToString(); 
+                textBoxTest.Text = directory;
+                copy.Save(directory+"\\ScreenShot_" + inc2 + ".png");
+            }
+           
         }
     }
 }

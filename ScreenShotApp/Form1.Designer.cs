@@ -51,7 +51,7 @@
             // 
             this.textBoxDisplay.Location = new System.Drawing.Point(21, 192);
             this.textBoxDisplay.Name = "textBoxDisplay";
-            this.textBoxDisplay.Size = new System.Drawing.Size(160, 27);
+            this.textBoxDisplay.Size = new System.Drawing.Size(233, 27);
             this.textBoxDisplay.TabIndex = 1;
             // 
             // textBoxTest
