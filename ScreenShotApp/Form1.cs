@@ -31,22 +31,32 @@ namespace ScreenShotApp
         {
             // reading variable from .txt file =>
 
-            Int64 x;
+            char x;
+
+                //Open the File
+             //   StreamReader sr = new StreamReader("c:\\ScreenShotApp\\i.txt");
+                //  StreamWriter sw = new StreamReader("\\ScreenShotApp\\i.txt", true, Encoding.ASCII);
+
+            //    x = (char)sr.Read();
+            string path = @"c:\\ScreenShotApp\\i.txt";
+
             try
             {
-                //Open the File
-                StreamWriter sw = new StreamWriter("\\ScreenShotApp\\i.txt", true, Encoding.ASCII);
-                x = long.Parse(sw);
-               x = sw();
-                    //(x);
-                
-                sw.Close();
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    x = (char)sr.Read();
+                }
             }
-            finally
+            catch (Exception d)
             {
-                Console.WriteLine("Executing finally block.");
+                Console.WriteLine("The process failed: {0}", e.ToString());
             }
-           // end of reading from file <=
+
+            // end of reading from file <=
 
             this.Hide();
           //  System.Threading.Thread.Sleep(1000);
@@ -58,7 +68,7 @@ namespace ScreenShotApp
                 pictureBox1.Image = myImage;
 
             }
-            
+
             //int inc = 0;
             x += 1;
             string inc2 = "";
