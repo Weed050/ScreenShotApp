@@ -3,7 +3,7 @@ namespace ScreenShotApp
 {
     public partial class Form1 : Form
     {
-        public string directory{ get; set; }
+        public static string? directory{ get; set; }
         public static int inc;
         
         public Form1()
@@ -30,9 +30,14 @@ namespace ScreenShotApp
             this.Hide();
           //  System.Threading.Thread.Sleep(1000);
             SendKeys.Send("{PRTSC}");
-            Image myImage = Clipboard.GetImage();
-            pictureBox1.Image = myImage;
             Image copy = pictureBox1.Image;
+            if (Clipboard.GetImage() != null)
+            {
+                Image myImage = Clipboard.GetImage();
+                pictureBox1.Image = myImage;
+
+            }
+            
             //int inc = 0;
             inc += 1;
             string inc2 = "";
