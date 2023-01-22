@@ -4,6 +4,7 @@ namespace ScreenShotApp
     public partial class Form1 : Form
     {
         public string directory{ get; set; }
+        public static int inc;
         
         public Form1()
         {
@@ -29,11 +30,14 @@ namespace ScreenShotApp
             this.Hide();
             System.Threading.Thread.Sleep(1000);
             SendKeys.Send("{PRTSC}");
-            directory = directory.ToString();
             Image myImage = Clipboard.GetImage();
             pictureBox1.Image = myImage;
             Image copy = pictureBox1.Image;
-            copy.Save("D:\\pictures");
+            //int inc = 0;
+            inc += 1;
+            string inc2 = "";
+            inc2 = inc.ToString();
+            copy.Save("D:\\pictures\\ScreenShot_"+inc2+".png");
             this.Show();
             textBoxTest.Text = directory;
         }
