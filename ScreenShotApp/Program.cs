@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace ScreenShotApp
 {
     internal static class Program

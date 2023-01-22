@@ -1,4 +1,6 @@
 using System.Windows.Forms;
+using System.IO;
+using System.Text;
 namespace ScreenShotApp
 {
     public partial class Form1 : Form
@@ -27,6 +29,25 @@ namespace ScreenShotApp
 
         private void button2_Click(object sender, EventArgs e)
         {
+            // reading variable from .txt file =>
+
+            Int64 x;
+            try
+            {
+                //Open the File
+                StreamWriter sw = new StreamWriter("\\ScreenShotApp\\i.txt", true, Encoding.ASCII);
+                x = long.Parse(sw);
+               x = sw();
+                    //(x);
+                
+                sw.Close();
+            }
+            finally
+            {
+                Console.WriteLine("Executing finally block.");
+            }
+           // end of reading from file <=
+
             this.Hide();
           //  System.Threading.Thread.Sleep(1000);
             SendKeys.Send("{PRTSC}");
@@ -39,9 +60,9 @@ namespace ScreenShotApp
             }
             
             //int inc = 0;
-            inc += 1;
+            x += 1;
             string inc2 = "";
-            inc2 = inc.ToString();
+            inc2 = x.ToString();
           //  copy.Save("D:\\pictures\\ScreenShot_" + inc2 + ".png");
             this.Show();
             if(directory != null)
@@ -50,7 +71,16 @@ namespace ScreenShotApp
                 directory2 = directory.ToString(); 
                 textBoxTest.Text = directory;
                 copy.Save(directory+"\\ScreenShot_" + inc2 + ".png");
+
+                // opening file and saving variable
+                StreamWriter sw = new StreamWriter("\\ScreenShotApp\\i.txt", true, Encoding.ASCII);
+
+                sw.Write(inc2);
+
+                sw.Close();
+                // closing
             }
+            
            
         }
     }
