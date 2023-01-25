@@ -1,20 +1,42 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Text;
+using System.Text.Json;
+using System.Configuration;
+using System.Net.Http.Json;  // add the NuGet package
+
+
 namespace ScreenShotApp
 {
+
     public partial class Form1 : Form
     {
         public static string? directory { get; set; }
         public static int inc;
+        int x = 0;
 
+        private HttpClient client = new HttpClient();
         public Form1()
         {
             InitializeComponent();
+           // Form1 data = client.GetFromJsonAsync<Form1>(api);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            using (StreamReader r = new StreamReader("i.json")) 
+            {
+                string json = r.ReadToEnd();
+                Class1 source = JsonSerializer.Deserialize<Class1>(json);
+            }
+            x += 1;
+            //string jsonString = JsonSerializer.Serialize(destination, new JsonSerializerOptions() { WriteIndented = true });
+            //using (StreamWriter outputFile = new StreamWriter("dataReady.json")) { outputFile.WriteLine(jsonString);
+            //}
+
+
+
             FolderBrowserDialog diag = new FolderBrowserDialog();
             if (diag.ShowDialog() == DialogResult.OK)
             {
@@ -31,7 +53,6 @@ namespace ScreenShotApp
         {
             // reading variable from .txt file =>
 
-            int x = 0;
 
             //Open the File
             //   StreamReader sr = new StreamReader("c:\\ScreenShotApp\\i.txt");
@@ -39,7 +60,7 @@ namespace ScreenShotApp
 
             //    x = (char)sr.Read();
             string path = @"i.txt";
-
+          //  int z = 0;
             try
             {
                 //if (File.Exists(path))
@@ -48,7 +69,8 @@ namespace ScreenShotApp
                 //}
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    x = (char)sr.Read();
+                    x = sr.Read();
+                   // x = z.Parse();
                 }
             }
             catch (Exception d)
@@ -59,7 +81,7 @@ namespace ScreenShotApp
             // end of reading from file <=
 
             this.Hide();
-           // System.Threading.Thread.Sleep(200);
+            // System.Threading.Thread.Sleep(200);
             SendKeys.Send("{PRTSC}");
 
 
@@ -85,12 +107,16 @@ namespace ScreenShotApp
                 textBoxTest.Text = directory;
                 copy.Save(directory + "\\ScreenShot_" + inc2 + ".png");
 
+                //string jsonString = JsonSerializer.Serialize(destination, new JsonSerializerOptions() { WriteIndented = true });
+                //using (StreamWriter outputFile = new StreamWriter("dataReady.json")) { outputFile.WriteLine(jsonString);
+                //}
+
                 // opening file and saving variable
-                StreamWriter sw = new StreamWriter("i.txt", true, Encoding.ASCII);
+                //   StreamWriter sw = new StreamWriter("i.txt", true, Encoding.ASCII);
 
-                sw.Write(inc2);
+                // sw.Write(inc2);
 
-                sw.Close();
+                //  sw.Close();
                 // closing
             }
 
