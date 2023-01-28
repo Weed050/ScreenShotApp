@@ -13,13 +13,13 @@ namespace ScreenShotApp
     {
         public static string? directory { get; set; }
         public static int inc;
-        int x = 0;
 
         private HttpClient client = new HttpClient();
         public Form1()
         {
             InitializeComponent();
-           // Form1 data = client.GetFromJsonAsync<Form1>(api);
+            // Form1 data = client.GetFromJsonAsync<Form1>(api);
+
 
         }
 
@@ -30,7 +30,7 @@ namespace ScreenShotApp
                 string json = r.ReadToEnd();
                 Class1 source = JsonSerializer.Deserialize<Class1>(json);
             }
-            x += 1;
+
             //string jsonString = JsonSerializer.Serialize(destination, new JsonSerializerOptions() { WriteIndented = true });
             //using (StreamWriter outputFile = new StreamWriter("dataReady.json")) { outputFile.WriteLine(jsonString);
             //}
@@ -60,25 +60,22 @@ namespace ScreenShotApp
 
             //    x = (char)sr.Read();
             string path = @"i.txt";
-          //  int z = 0;
-            try
+            //  int z = 0;
+
+            //if (File.Exists(path))
+            //{
+            //    File.Delete(path);
+            //}
+            using (StreamReader sr = new StreamReader(path))
             {
-                //if (File.Exists(path))
-                //{
-                //    File.Delete(path);
-                //}
-                using (StreamReader sr = new StreamReader(path))
-                {
-                    x = sr.Read();
-                   // x = z.Parse();
-                }
-            }
-            catch (Exception d)
-            {
-                Console.WriteLine("The process failed: {0}", d.ToString());
+                string json = sr.ReadToEnd();
+                
+                int z = sr.Read();
+
             }
 
-            // end of reading from file <=
+            z = z + 1;
+            x = z.ToString();
 
             this.Hide();
             // System.Threading.Thread.Sleep(200);
@@ -95,7 +92,7 @@ namespace ScreenShotApp
             Image copy = pictureBox1.Image;
 
             //int inc = 0;
-            x += 1;
+
             string inc2 = "";
             inc2 = x.ToString();
             //  copy.Save("D:\\pictures\\ScreenShot_" + inc2 + ".png");
@@ -107,12 +104,15 @@ namespace ScreenShotApp
                 textBoxTest.Text = directory;
                 copy.Save(directory + "\\ScreenShot_" + inc2 + ".png");
 
-                //string jsonString = JsonSerializer.Serialize(destination, new JsonSerializerOptions() { WriteIndented = true });
-                //using (StreamWriter outputFile = new StreamWriter("dataReady.json")) { outputFile.WriteLine(jsonString);
-                //}
+                string jsonString = JsonSerializer.Serialize(directory2
+                    , new JsonSerializerOptions() { WriteIndented = true });
+                using (StreamWriter outputFile = new StreamWriter("i.json"))
+                {
+                    outputFile.WriteLine(jsonString);
+                }
 
                 // opening file and saving variable
-                //   StreamWriter sw = new StreamWriter("i.txt", true, Encoding.ASCII);
+                //  StreamWriter sw = new StreamWriter("i.txt", true, Encoding.ASCII);
 
                 // sw.Write(inc2);
 
