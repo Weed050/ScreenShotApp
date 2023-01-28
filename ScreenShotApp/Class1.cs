@@ -2,10 +2,13 @@
 
 namespace ScreenShotApp
 {
-    public class Class1
+    public class Variables1
     {
         public int z { get; set; }
-        public string directiory { get; set; }
+        public string directory { get; set; }
     }
+
 }
+
+
 
